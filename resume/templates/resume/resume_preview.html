@@ -1,0 +1,30 @@
+{% extends 'resume/base.html' %} {% block content %}
+<h2>{{ profile.full_name }}</h2>
+<p>{{ profile.bio }}</p>
+
+<h3>Skills</h3>
+<p>{{ profile.skills }}</p>
+
+<h3>Education</h3>
+<ul>
+  {% for edu in education %}
+  <li>{{ edu.degree }} - {{ edu.college }} ({{ edu.year }})</li>
+  {% endfor %}
+</ul>
+
+<h3>Projects</h3>
+<ul>
+  {% for proj in projects %}
+  <li>
+    <strong>{{ proj.title }}</strong><br />
+    {{ proj.description }}<br />
+    Tech: {{ proj.tech_stack }}
+  </li>
+
+  <a href="{% url 'resume_pdf' %}">
+    <button>Download Resume PDF</button>
+  </a>
+
+  {% endfor %}
+</ul>
+{% endblock %}

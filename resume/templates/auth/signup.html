@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup - FreshStart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #10b981;
+        --primary-dark: #059669;
+        --primary-light: #6ee7b7;
+        --accent: #8b5cf6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #6c63ff 100%
+        );
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+
+      .signup-container {
+        width: 100%;
+        max-width: 460px; /* கொஞ்சம் wide கொடுத்திருக்கேன் signup-க்கு fields அதிகமா இருக்கலாம் */
+        padding: 2.8rem 2.2rem;
+        background: rgba(255, 255, 255, 0.09);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow:
+          0 10px 40px rgba(31, 38, 135, 0.4),
+          inset 0 0 25px rgba(255, 255, 255, 0.08);
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 2.3rem;
+        font-weight: 700;
+        margin-bottom: 2.8rem;
+        background: linear-gradient(
+          to right,
+          var(--primary-light),
+          #c084fc,
+          #a78bfa
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .form-group {
+        margin-bottom: 1.9rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.65rem;
+        font-size: 0.98rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      input {
+        width: 100%;
+        padding: 1rem 1.3rem;
+        background: rgba(255, 255, 255, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 0.9rem;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary-light);
+        box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.28);
+        background: rgba(255, 255, 255, 0.19);
+      }
+
+      button {
+        width: 100%;
+        padding: 1.1rem;
+        margin-top: 1.2rem;
+        font-size: 1.12rem;
+        font-weight: 600;
+        background: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        border: none;
+        border-radius: 0.9rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+      }
+
+      button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
+        background: linear-gradient(
+          to right,
+          var(--primary-light),
+          var(--primary)
+        );
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.97rem;
+        color: rgba(255, 255, 255, 0.88);
+      }
+
+      .login-link a {
+        color: var(--primary-light);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .login-link a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+
+      .errorlist {
+        color: #f87171;
+        font-size: 0.88rem;
+        margin-top: 0.5rem;
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup-container">
+      <h2>Create Account</h2>
+
+      <form method="post">
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <ul class="errorlist">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Signup</button>
+      </form>
+
+      <p class="login-link">
+        Already have an account? <a href="/login/">Login</a>
+      </p>
+    </div>
+  </body>
+</html>

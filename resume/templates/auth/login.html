@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - FreshStart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #10b981;
+        --primary-dark: #059669;
+        --primary-light: #6ee7b7;
+        --accent: #8b5cf6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #6c63ff 100%
+        );
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 420px;
+        padding: 2.5rem 2rem;
+        background: rgba(255, 255, 255, 0.09);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow:
+          0 8px 32px rgba(31, 38, 135, 0.37),
+          inset 0 0 20px rgba(255, 255, 255, 0.08);
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        background: linear-gradient(to right, var(--primary-light), #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .form-group {
+        margin-bottom: 1.8rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      input {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 0.8rem;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary-light);
+        box-shadow: 0 0 0 4px rgba(110, 231, 183, 0.25);
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      button {
+        width: 100%;
+        padding: 1rem;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        background: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        border: none;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.55);
+        background: linear-gradient(
+          to right,
+          var(--primary-light),
+          var(--primary)
+        );
+      }
+
+      .signup-link {
+        text-align: center;
+        margin-top: 1.8rem;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .signup-link a {
+        color: var(--primary-light);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .signup-link a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Login</h2>
+
+      <form method="post">
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <p style="color: #f87171; font-size: 0.85rem; margin-top: 0.4rem">
+            {{ field.errors|join:", " }}
+          </p>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p class="signup-link">No account? <a href="/signup/">Signup</a></p>
+    </div>
+  </body>
+</html>

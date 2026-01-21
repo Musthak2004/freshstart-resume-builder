@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Helvetica;
+      }
+      h1 {
+        text-align: center;
+      }
+      h3 {
+        border-bottom: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ profile.full_name }}</h1>
+    <p>{{ profile.bio }}</p>
+    <hr />
+
+    <h3>Skills</h3>
+    <p>{{ profile.skills }}</p>
+    <hr />
+
+    <h3>Education</h3>
+    <ul>
+      {% for edu in education %}
+      <li>{{ edu.degree }} - {{ edu.college }} ({{ edu.year }})</li>
+      {% endfor %}
+    </ul>
+    <hr />
+
+    <h3>Projects</h3>
+    <ul>
+      {% for proj in projects %}
+      <li>
+        <b>{{ proj.title }}</b><br />
+        {{ proj.description }}<br />
+        Tech: {{ proj.tech_stack }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
